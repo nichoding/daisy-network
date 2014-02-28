@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<!--PDL 配置： networkCompress: 网络包是够压缩；networkCompressThreshold：网络包压缩阀值，单位byte；networkCrypto：网络包是否加密 -->
+	<pdl networkCompress="false" networkCompressThreshold="100" networkCrypto="true" noDelay="true" sendBuff="8192" recvBuff="8192"></pdl>
+	<!-- RPC Client配置: timeout: 毫秒单位,0表示没有timeout； noDelay: 是否采用nagle算法;-->
+	<rpc timeout="5000" noDelay="true" sendBuff="8192" recvBuff="8192"></rpc>
+	<!--服务配置  服务器类型: 1: tomcat, 2: socketserver -->
+	<servers>
+		<!-- tomcat配置 -->
+		<server id="1" type="1" name="tomcat" internalIp="127.0.0.1" internalPort="8001"/> 
+		<!-- socketserver配置 -->
+		<server id="2" type="2" name="socketserver" internalIp="127.0.0.1" internalPort="9001" externalPort="9521"/>
+	</servers>
+</root>
