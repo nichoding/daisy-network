@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="tool-proto-gen" default="main" basedir=".">
+	<property name="output.name" value="tool-proto-gen.jar" />
+	<property name="server.dir" value="${basedir}" />
+	<property name="dist.dir" value="${basedir}/dist" />
+	<property name="src.dir" value="${server.dir}/src" />
+	<property name="testsrc.dir" value="${server.dir}/test" />
+	<property name="template.dir" value="${server.dir}/template" />
+	<property name="lib.dir" value="${server.dir}/lib" />
+	<property name="classes.dir" value="${server.dir}/build" />
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+
+	<pathconvert property="libs.project" pathsep=" ">
+		<mapper>
+			<chainedmapper>
+				<flattenmapper />
+				<globmapper from="*" to="lib/*" />
+			</chainedmapper>
+		</mapper>
+		<path>
+			<fileset dir="${lib.dir}" includes="**/*.jar" />
+		</path>
+	</pathconvert>
+
+	<target name="main" depends="compile,package,clean" />
+
+	<target name="prepare">
+		<mkdir dir="${classes.dir}" />
+	</target>
+
+	<target name="run-depend" if="src.depend">
+		<echo message="Removing class files that channged and dependent class files" />
+		<depend cache="${classes.dir}" srcdir="${src.dir}" destdir="${classes.dir}" />
+	</target>
+
+	<target name="copy-resource">
+		<echo message="Copy xml,dat and property file from work src dir to the class dir" />
+		<copy todir="${classes.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.xml" />
+				<include name="**/*.tpl" />
+			</fileset>
+		</copy>
+		<copy file="${server.dir}/logback.xml" tofile="${classes.dir}/logback.xml">
+		</copy>
+		<!--<copy file="${server.dir}/config.properties" tofile="${classes.dir}/config.properties"></copy>-->
+
+	</target>
+
+	<target name="compile" depends="prepare,run-depend,copy-resource" description="compile">
+		<javac encoding="utf-8" includeantruntime="on" source="1.6" debug="true" destdir="${classes.dir}" srcdir="${src.dir}" classpathref="classpath" />
+	</target>
+	<target name="package" description="Creates distribution jar file">
+		<copy todir="${dist.dir}/lib" filtering="off">
+			<flattenmapper />
+			<fileset dir="${lib.dir}" includes="**/*.jar" />
+		</copy>
+		<jar destfile="${dist.dir}/${output.name}" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="com.the9.tool.proto.gen.Startup" />
+				<attribute name="Class-Path" value="${libs.project}" />
+			</manifest>
+		</jar>
+	</target>
+	<target name="clean">
+		<delete quiet="true" dir="${classes.dir}" />
+	</target>
+</project>

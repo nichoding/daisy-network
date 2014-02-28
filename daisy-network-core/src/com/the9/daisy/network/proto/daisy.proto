@@ -1,0 +1,16 @@
+package com.the9.daisy.network.proto;
+//与客户端通信的消息
+message GameMsg{
+	required int32 type = 1;//消息类型值
+	optional int32 flag = 2;//压缩加密标识
+	required bytes content = 3;//内容
+	optional int64 timestamp = 4;//时间戳，客户端模拟的服务器时间
+	optional int32 id=5;//消息id，由客户端生成
+}
+//rpc通信的基本消息
+message RpcMsg{
+	required int32 seqId=1;//消息流水id，用于确定rpc源消息与rpc回调消息的时候相对应
+	optional int64 timestamp=2;//时间戳
+	required int32 type=3;//消息类型值
+	required bytes content =4;//这里的content就是我们自定义的消息
+}

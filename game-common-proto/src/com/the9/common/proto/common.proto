@@ -1,0 +1,14 @@
+package com.the9.common.proto;
+message UserDTO{
+	required int32 id=1;
+	required string name=2;
+	optional int64 birthday=3;
+	repeated ItemDTO items=4;
+}
+message ItemDTO{
+	required int64 id=1;
+	required int32 templateId=2;
+}
+message ServerConfigDTO{
+	
+}

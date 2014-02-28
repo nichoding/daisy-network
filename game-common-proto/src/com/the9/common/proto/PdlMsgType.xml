@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root>
+  <msg name="LoginGame">
+    <c2s value="10001"/>
+    <s2c value="10002"/>
+  </msg>
+  <msg name="LoginOut">
+    <c2s value="10003"/>
+  </msg>
+  <msg name="MaintainNotice">
+    <s2c value="10004"/>
+  </msg>
+  <msg name="KeepAlive">
+    <c2s value="10005"/>
+    <s2c value="10006"/>
+  </msg>
+</root>
