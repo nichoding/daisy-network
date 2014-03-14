@@ -75,7 +75,9 @@ public class PdlService extends AbstractService {
 
 	@Override
 	protected void onStop() throws ServiceException {
-		bootstrap.shutdown();
+		if (bootstrap != null) {
+			bootstrap.shutdown();
+		}
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.the9.daisy.pdl;
 
 import java.io.IOException;
-
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.ExceptionEvent;
@@ -28,7 +27,8 @@ public abstract class AbstractPdlServiceHandler extends SimpleChannelHandler {
 
 	protected final AbstractMsgDecoder msgDecoder;
 
-	public AbstractPdlServiceHandler(PdlService pdlServer, AbstractMsgDecoder msgDecoder) {
+	public AbstractPdlServiceHandler(PdlService pdlServer,
+			AbstractMsgDecoder msgDecoder) {
 		super();
 		this.pdlServer = pdlServer;
 		this.msgDecoder = msgDecoder;
@@ -46,25 +46,10 @@ public abstract class AbstractPdlServiceHandler extends SimpleChannelHandler {
 		onChannelConnected(ctx, e);
 	}
 
-	/**
-	 * 玩家断开，登出游戏
-	 */
 	@Override
 	public void channelClosed(ChannelHandlerContext ctx, ChannelStateEvent e)
 			throws Exception {
-	}
-
-	@Override
-	public void closeRequested(ChannelHandlerContext ctx, ChannelStateEvent e)
-			throws Exception {
-		logger.info("服务器主动关闭连接:{}", ctx.getChannel());
-		ctx.sendDownstream(e);
-	}
-
-	@Override
-	public void channelDisconnected(ChannelHandlerContext ctx,
-			ChannelStateEvent e) throws Exception {
-		logger.info("{} channelDisconnected", ctx.getChannel());
+		onChannelClosed(ctx, e);
 	}
 
 	/**

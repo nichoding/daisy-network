@@ -1,0 +1,1 @@
+[{"@name":"LoginGame","c2s":{"@value":"10001"},"s2c":{"@value":"10002"}},{"@name":"LoginOut","c2s":{"@value":"10003"}},{"@name":"PublishNotice","s2c":{"@value":"10004"}},{"@name":"KeepAlive","c2s":{"@value":"10005"},"s2c":{"@value":"10006"}}]

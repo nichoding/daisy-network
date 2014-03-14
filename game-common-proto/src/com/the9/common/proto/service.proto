@@ -1,4 +1,0 @@
-package com.the9.common.proto;
-import "common.proto";
-import "pdl.proto";
-import "rpc.proto";

@@ -1,0 +1,34 @@
+package com.the9.daisy.network.proto;
+import "common_rpc.proto";
+message LoginGameReq{
+}
+message LoginGameAck{
+	required UserDTO userDTO=1;
+}
+message LoginOutReq{
+	required int32 userId=1;
+}
+message GetServerConfigReq{
+}
+message GetServerConfigAck{
+	required ServerConfigDTO cerverConfigDTO=1;
+}
+message PublishNoticeReq{
+	required string content=1;
+}
+message StopServerReq{
+}
+message PauseServerReq{
+}
+message ResumeServerReq{
+}
+message OpenServerReq{
+}
+message GetServerStatusReq{
+}
+message GetServerStatusAck{
+}
+message GetOnlineCountReq{
+}
+message GetOnlineCountAck{
+}

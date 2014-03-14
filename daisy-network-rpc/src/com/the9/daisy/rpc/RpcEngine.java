@@ -25,9 +25,9 @@ public class RpcEngine {
 
 	private RpcMsgTypeHelper rpcMsgTypeHelper;
 
-	protected ConfigManager configManager;
+	private ConfigManager configManager;
 
-	protected Map<Integer, RpcClient> rpcClients = new HashMap<Integer, RpcClient>();
+	private Map<Integer, RpcClient> rpcClients = new HashMap<Integer, RpcClient>();
 
 	public RpcEngine(ConfigManager configManager,
 			RpcMsgTypeHelper rpcMsgTypeHelper) {

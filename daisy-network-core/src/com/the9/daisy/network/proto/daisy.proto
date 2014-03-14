@@ -2,7 +2,7 @@ package com.the9.daisy.network.proto;
 //与客户端通信的消息
 message GameMsg{
 	required int32 type = 1;//消息类型值
-	optional int32 flag = 2;//压缩加密标识
+	optional int32 flag = 2;//压缩加密标识,0：不加密，不压缩 1：不加密，压缩 2：加密，不压缩 3：加密，压缩
 	required bytes content = 3;//内容
 	optional int64 timestamp = 4;//时间戳，客户端模拟的服务器时间
 	optional int32 id=5;//消息id，由客户端生成

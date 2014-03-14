@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="120 seconds" debug="false">
+	
+	<property name="SERVER_NAME" value="daisy-network-proto-gen"></property>
+	
+	<!-- 控制台输出 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n %ex</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 按照每天生成日志文件 -->
+ 	<appender name="file"  
+        class="ch.qos.logback.core.rolling.RollingFileAppender">   
+        <file>${SERVER_NAME}.log</file> 
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">   
+            <FileNamePattern>${SERVER_NAME}.log.%d{yyyy-MM-dd}</FileNamePattern>   
+            <MaxHistory>720</MaxHistory>   
+        </rollingPolicy>   
+        <encoder>   
+           <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n %ex</pattern>
+       </encoder>   
+    </appender> 
+    
+	<!-- root logger -->
+	<root level="info">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="file" />
+	</root>
+	
+</configuration> 

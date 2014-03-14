@@ -86,8 +86,7 @@ public abstract class AbstractService {
 
 	public void stop() {
 		logger.info("stopping service name={}", getServiceName());
-		if (state == ServiceState.NEW || state == ServiceState.STOPPING
-				|| state == ServiceState.TERMINATED) {
+		if (state == ServiceState.STOPPING || state == ServiceState.TERMINATED) {
 			logger.error("invalid state={}", state);
 		}
 		state = ServiceState.STOPPING;

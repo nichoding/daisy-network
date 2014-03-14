@@ -6,7 +6,7 @@ import com.google.protobuf.GeneratedMessage;
 
 public abstract class AbstractSession {
 
-	protected int userId;
+	protected long userId;
 
 	protected String sessionKey;
 
@@ -21,7 +21,7 @@ public abstract class AbstractSession {
 		return channel;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
@@ -29,7 +29,7 @@ public abstract class AbstractSession {
 		return sessionKey;
 	}
 
-	public void bind(int userId, String sessionKey) {
+	public void bind(long userId, String sessionKey) {
 		this.userId = userId;
 		this.sessionKey = sessionKey;
 	}

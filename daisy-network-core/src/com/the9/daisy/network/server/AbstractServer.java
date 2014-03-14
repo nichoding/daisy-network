@@ -3,7 +3,13 @@ package com.the9.daisy.network.server;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public abstract class AbstractServer {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(AbstractServer.class);
 
 	protected int serverId;
 
@@ -24,10 +30,20 @@ public abstract class AbstractServer {
 	protected abstract void onStart();
 
 	public void start() {
-		onStart();
+		long beginTime = System.currentTimeMillis();
+		try {
+			onStart();
+		} catch (Exception e) {
+			logger.info("error exists on start serverId={} will exits.",
+					serverId, e);
+			this.stop();
+			return;
+		}
 		for (AbstractService service : serviceMap.values()) {
 			service.start();
 		}
+		logger.info("serverId={} start completely in {} ms!", serverId,
+				(System.currentTimeMillis() - beginTime));
 	}
 
 	protected abstract void onStop();
@@ -37,5 +53,6 @@ public abstract class AbstractServer {
 		for (AbstractService service : serviceMap.values()) {
 			service.stop();
 		}
+		logger.info("serverId={} stop completely,bye-bye!", serverId);
 	}
 }
